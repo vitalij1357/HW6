@@ -1,0 +1,3 @@
+{
+ "DBurl": "jdbc:h2:./DB_HW6"
+}
