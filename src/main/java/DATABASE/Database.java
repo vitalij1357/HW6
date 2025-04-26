@@ -1,7 +1,7 @@
 package DATABASE;
 
 
-import PREFS.Prefs;
+import prefs.Prefs;
 
 import java.sql.*;
 

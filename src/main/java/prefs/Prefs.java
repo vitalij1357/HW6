@@ -1,8 +1,7 @@
-package PREFS;
+package prefs;
 
 import com.google.gson.Gson;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
