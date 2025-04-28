@@ -5,6 +5,7 @@ import util.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -21,8 +22,9 @@ public class DatabaseQueryService {
     public List<MaxSalaryWorker> findMaxSalaryWorker(Database db) throws IOException {
         String readSours = String.join("\n", Files.readAllLines(Paths.get(MAX_SALARY)));
         List<MaxSalaryWorker> result = new ArrayList<>();
-        ResultSet resultSet = db.executeQuery(readSours);
+        PreparedStatement ps = db.prepareStatement(readSours);
         try {
+        ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 MaxSalaryWorker maxSalaryWorker = new MaxSalaryWorker();
                 maxSalaryWorker.setSalary(resultSet.getFloat("SALARY"));
@@ -35,10 +37,10 @@ public class DatabaseQueryService {
     }
     public List<YoungestOldestWorkers> findYoungestOldestWorkers(Database db) throws IOException {
         String readSours = String.join("\n", Files.readAllLines(Paths.get(Y_O_WORKERS)));
-        ResultSet resultSet = db.executeQuery(readSours);
         List<YoungestOldestWorkers> result = new ArrayList<>();
-
+        PreparedStatement ps = db.prepareStatement(readSours);
         try {
+        ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 YoungestOldestWorkers youngestOldestWorkers = new YoungestOldestWorkers();
                 youngestOldestWorkers.setType(resultSet.getString("TYPE"));
@@ -53,9 +55,10 @@ public class DatabaseQueryService {
     }
     public List<MaxProjectClient> findMaxProjectClient(Database database) throws IOException {
             String readSors = String.join("\n", Files.readAllLines(Paths.get(M_P_CLIENT)));
-            ResultSet rs = database.executeQuery(readSors);
             List<MaxProjectClient> result = new ArrayList<>();
+        PreparedStatement ps = database.prepareStatement(readSors);
         try {
+        ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             MaxProjectClient maxProjectClient = new MaxProjectClient();
             maxProjectClient.setId(rs.getLong("ID"));
@@ -71,9 +74,10 @@ public class DatabaseQueryService {
     }
     public List<LongestProject> findLongestProject(Database database) throws IOException {
         String readSorse = String.join("\n", Files.readAllLines(Paths.get(L_PROJECT)));
-        ResultSet rs = database.executeQuery(readSorse);
         List<LongestProject> result = new ArrayList<>();
+        PreparedStatement ps = database.prepareStatement(readSorse);
         try {
+          ResultSet rs = ps.executeQuery();
           while (rs.next()) {
               LongestProject longestProject = new LongestProject();
               longestProject.setId(rs.getLong("ID"));
@@ -90,9 +94,10 @@ public class DatabaseQueryService {
     }
     public List<ProjectPrice> printProjectPrice(Database database) throws IOException {
         String readSorse = String.join("\n", Files.readAllLines(Paths.get(P_P_PRICE)));
-        ResultSet rs = database.executeQuery(readSorse);
         List<ProjectPrice> result = new ArrayList<>();
+        PreparedStatement ps = database.prepareStatement(readSorse);
         try {
+        ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ProjectPrice projectPrice = new ProjectPrice();
                 projectPrice.setProjectId(rs.getLong("PROJECT_ID"));

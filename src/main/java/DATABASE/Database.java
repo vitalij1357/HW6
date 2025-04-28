@@ -34,6 +34,13 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
+    public PreparedStatement prepareStatement(String sql){
+        try {
+            return connection.prepareStatement(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public int executeUpdate (String sql){
         try {
