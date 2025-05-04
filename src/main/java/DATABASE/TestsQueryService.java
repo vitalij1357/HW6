@@ -1,5 +1,6 @@
 package DATABASE;
 
+import prefs.Prefs;
 import util.*;
 
 import java.io.IOException;
@@ -31,3 +32,4 @@ public class TestsQueryService {
         yow.forEach(System.out::println);
     }
 }
+

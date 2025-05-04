@@ -1,21 +1,16 @@
 package DATABASE;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import org.flywaydb.core.Flyway;
+import prefs.Prefs;
 
 public class DatabaseInitService {
-    public static void main(String[] args) throws IOException {
-        String filename = "sql/init_db.sql";
-        String initDB = String.join("\n", Files.readAllLines(Paths.get(filename)));
-        Database database = Database.getObject();
-        PreparedStatement ps = database.prepareStatement(initDB);
-        try {
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+   private static final String CONNECT_URL = new Prefs().getString("DBurl");
+    public  void initDb() {
+        Flyway flyWay = Flyway.configure().
+                dataSource(CONNECT_URL, null, null).
+                load();
+        flyWay.migrate();
+
+
     }
 }
