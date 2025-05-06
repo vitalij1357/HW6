@@ -12,23 +12,28 @@ public class ClientService {
         this.dao = dao;
     }
 
-    public long create (String name) throws SQLException {
+    public long create(String name) {
         validateName(name);
         return dao.create(name);
     }
-    public String getById(long id) throws SQLException {
+
+    public String getById(long id) {
         return dao.getById(id);
     }
-    public void SetName(long id,String name) throws SQLException {
+
+    public void SetName(long id, String name) {
         validateName(name);
         dao.setName(id, name);
     }
-    public void deleteById(long id) throws SQLException {
+
+    public void deleteById(long id) {
         dao.deleteById(id);
     }
-    public List<Client> listAll() throws SQLException {
+
+    public List<Client> listAll() {
         return dao.listAll();
     }
+
     private void validateName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Name cent be null");

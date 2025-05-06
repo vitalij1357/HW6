@@ -11,6 +11,7 @@ public class ClientServiceTests {
         DatabaseInitService databaseInitService = new DatabaseInitService();
         ClientDaoService clientDaoService = new ClientDaoService();
         ClientService clientService = new ClientService(clientDaoService);
+        clientService.SetName(21,"Ivan");
         List<Client> clients = clientService.listAll();
         clients.forEach(System.out::println);
 
